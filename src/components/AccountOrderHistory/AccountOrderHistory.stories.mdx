@@ -1,0 +1,35 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs'
+
+import AccountOrderHistory from '.'
+import getDecorators from './decorators'
+import Description from './description.mdx'
+
+<Meta
+  title="UI Primitives/AccountOrderHistory"
+  parameters={{ layout: 'padded' }}
+  args={{ loggedIn: true }}
+  decorators={getDecorators()}
+/>
+
+# AccountOrderHistory
+
+<Description />
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story
+    name="Default"
+    parameters={{
+      docs: {
+        source: {
+          code: '<AccountOrderHistory orders={orders} />',
+        },
+      },
+    }}
+  >
+    <AccountOrderHistory />
+  </Story>
+</Preview>

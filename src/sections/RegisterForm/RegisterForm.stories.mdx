@@ -1,0 +1,38 @@
+import { ArgsTable, Meta, Preview, Story } from '@storybook/addon-docs'
+
+import RegisterForm from '.'
+import Description from './description.mdx'
+import { getCustomerDecorator } from '../../lib/decorators'
+
+<Meta
+  title="Sections/RegisterForm"
+  component={RegisterForm}
+  argTypes={{
+    loggedIn: {
+      control: 'boolean',
+    },
+    longFields: {
+      control: 'boolean',
+    },
+  }}
+  args={{ loggedIn: false, longFields: false }}
+  decorators={getCustomerDecorator()}
+/>
+
+# RegisterForm
+
+<Description />
+
+## Props
+
+<ArgsTable of={RegisterForm} />
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="Default">
+    <RegisterForm />
+  </Story>
+</Preview>

@@ -1,0 +1,24 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+
+import CartItems from '.'
+
+<Meta title="Components/CartItems" component={CartItems} parameters={{ layout: 'centered' }} />
+
+# CartItems
+
+CartItems component displays items in the cart.
+It allows a customer to proceed to Checkout or to navigate to products (continue shopping).
+
+## Usage
+
+This component doesn't accept any props. It takes items from the cart context, using `useCartState` hook from `frontend-checkout`.
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story name="Default">
+    <CartItems />
+  </Story>
+</Canvas>

@@ -1,0 +1,21 @@
+import { Meta, Preview, Story, Container, ArgsTable } from '@storybook/addon-docs'
+
+import Fallback from '.'
+
+<Meta title="Sections/Fallback" component={Fallback} />
+
+# Fallback
+
+This is the site section which is rendered when no page is defined in FE for the current path. It renders "Page not found" message by default.
+
+## Props
+
+No props available.
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="Default">{args => <Fallback {...args} />}</Story>
+</Preview>

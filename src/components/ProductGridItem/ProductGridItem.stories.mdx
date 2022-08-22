@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import LinkTo from '@storybook/addon-links/react'
+
+import { shopifyProducts, bigCommerceProducts } from '../../lib/mocks'
+import ProductGridItem from '.'
+import List from '../List'
+import Description from './description.mdx'
+import Usage from './usage.mdx'
+
+<Meta
+  title="UI Primitives/ProductGridItem"
+  component={ProductGridItem}
+  parameters={{ layout: 'centered' }}
+/>
+
+# ProductGridItem
+
+<Description />
+
+## Usage
+
+<Usage />
+
+## Props
+
+<ArgsTable of={ProductGridItem} />
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story name="Default">
+    {(_, context) => (
+      <List style={{ width: '320px', height: '320px' }}>
+        <ProductGridItem
+          product={
+            context.globals.platform.includes('shopify')
+              ? shopifyProducts[0]
+              : bigCommerceProducts[1]
+          }
+        />
+      </List>
+    )}
+  </Story>
+</Canvas>

@@ -1,0 +1,60 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_VERSION: 12
+
+    # Checkout code
+    steps:
+      - uses: actions/checkout@v2
+
+      # Setup node
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # Cache node_modules
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-v${{ env.NODE_VERSION }}-${{ hashFiles('**/yarn.lock') }}
+
+      # Install dependencies
+      - run: yarn install
+
+      # Run linter
+      - run: yarn lint
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Create env file
+        run: |
+          cat << EOF >> .env
+          PLATFORM=shopify
+          SEARCH_APP_ID=92OWXSK910
+          SEARCH_API_KEY=${{ secrets.SEARCH_API_KEY }}
+          SEARCH_INDICES=[{"name":"starter-kit-mvp-products-manual","cmsModel":{"id":"1979034f-2721-47b3-940d-07fd055e8ba4","name":"Products"}}]
+          UPLOADCARE_CDN_URL=f.shgcdn.com
+          VALID_UPLOADCARE_CDN_URLS=assets.frontend.shogun.dev,frontend.shgcdn.com,ucarecdn.com,f.shgcdn.com
+          STORYBOOK_MSW_URL=/hub-starter-kit/mockServiceWorker.js
+          EOF
+
+      - name: Install and Build Storybook 🔧
+        run: |
+          yarn install
+          yarn build-storybook -s ./static -o ./build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.

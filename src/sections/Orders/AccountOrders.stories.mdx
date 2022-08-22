@@ -1,0 +1,36 @@
+import { ArgsTable, Meta, Preview, Story } from '@storybook/addon-docs'
+
+import { getCustomerDecorator } from '../../lib/decorators'
+
+import AccountOrders from '.'
+import Description from './description.mdx'
+
+<Meta
+  title="Sections/AccountOrders"
+  component={AccountOrders}
+  argTypes={{
+    loggedIn: {
+      control: 'boolean',
+    },
+  }}
+  args={{ loggedIn: false }}
+  decorators={getCustomerDecorator()}
+/>
+
+# AccountOrders
+
+<Description />
+
+## Props
+
+<ArgsTable of={AccountOrders} />
+
+## Examples
+
+### Default
+
+<Preview>
+  <Story name="Default">
+    <AccountOrders />
+  </Story>
+</Preview>

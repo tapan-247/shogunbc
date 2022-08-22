@@ -1,0 +1,49 @@
+import { ArgsTable, Meta, Preview, Story } from '@storybook/addon-docs'
+
+import { getQueryDecorators, getCustomerDecorator } from '../../lib/decorators'
+import AccountAddress from '.'
+import Description from '.'
+
+<Meta
+  title="Sections/AccountAddress"
+  component={AccountAddress}
+  args={{ loggedIn: true }}
+  decorators={getCustomerDecorator()}
+/>
+
+# Header
+
+<Description />
+
+## Props
+
+<ArgsTable of={AccountAddress} />
+
+## Examples
+
+### Create
+
+<Preview>
+  <Story name="Create">
+    <AccountAddress />
+  </Story>
+</Preview>
+
+### Edit
+
+<Preview>
+  <Story
+    name="Edit"
+    parameters={{ query: { id: '359276' } }}
+    decorators={[
+      ...getQueryDecorators(
+        {
+          query: { id: '359276' },
+        },
+        '/account/address',
+      ),
+    ]}
+  >
+    <AccountAddress />
+  </Story>
+</Preview>
